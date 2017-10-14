@@ -1,0 +1,14 @@
+{
+  "name": "omni_labs_interview_app",
+  "version": "1.0.0",
+  "description": "App with user and message for Omni Lab interview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kristyn Bryan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
