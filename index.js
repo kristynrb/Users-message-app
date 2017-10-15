@@ -28,7 +28,12 @@ app.use('/users', usersController);
 // ROUTES
 // landing page for app
 app.get('/', (req, res) => {
-  res.render("index.ejs");
+  res.render('index.ejs');
+});
+
+// for testing only
+app.get('/show', (req, res) => {
+  res.render('show.ejs')
 });
 
 // welcome page - for those logged in
