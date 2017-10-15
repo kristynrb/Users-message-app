@@ -31,10 +31,20 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
-// for testing only
+// ------------ for testing only - START--------------------
 app.get('/show', (req, res) => {
   res.render('show.ejs')
 });
+
+app.get('/private-messages', (req, res) => {
+  res.render('messages/private.ejs')
+});
+
+app.get('/public-messages', (req, res) => {
+  res.render('messages/public.ejs')
+});
+
+// ------------ for testing only - END --------------------
 
 // welcome page - for those logged in
 app.get('/welcome', (req, res) => {
