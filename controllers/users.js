@@ -26,4 +26,8 @@ router.get('/logout', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  res.render('messages/private.ejs');
+});
+
 module.exports = router;
