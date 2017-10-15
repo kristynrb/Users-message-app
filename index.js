@@ -72,7 +72,7 @@ db.on('error', () => {
   console.log("Database error: check that your mongod instance is running");
 });
 
-db.once('openURI', () => {
+mongoose.connection.once('open', () => {
   console.log("Database up and running");
 });
 
