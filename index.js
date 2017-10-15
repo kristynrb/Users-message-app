@@ -28,6 +28,9 @@ app.use('/users', usersController);
 const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController);
 
+const messageController = require('./controllers/messages.js');
+app.use('/messages', messageController);
+
 // ROUTES
 // landing page for app
 app.get('/', (req, res) => {
