@@ -1,17 +1,21 @@
 // MIDDLEWARE
-const express = require('express'),
+const express = require('express');
       app = express(),
       bodyParser = require('body-parser'),
       ejs = require('ejs'),
       session = require('express-session'),
-      mongoose = require('mongoose'),
+      mongoose = require('mongoose')
 
-// SET SESSION MIDDLEWARE
+// SET MIDDLEWARE
 app.use(session({
   secret: "OmniLabInterviewSecret",
   resave: false,
-  saveUninitialized: false
-}))
+  saveUninitialized: false,
+}));
+
+app.use(bodyParser.urlencoded({
+  extended:false,
+}));
 
 // VIEW ENGINE
 app.set('views', './views');
@@ -34,17 +38,6 @@ app.get('/welcome', (req, res) => {
   } else {
     res.redirect('/sessions/login')
   }
-});
-
-// destory session
-router.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-	    if(err){
-	      console.log(err);
-	    } else {
-	      res.redirect('/');
-	    }
-  });
 });
 
 //DATABASE & SERVER
