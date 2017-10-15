@@ -26,6 +26,17 @@ router.get('/logout', (req, res) => {
   });
 });
 
+// Get public messages
+router.get('/messages', (req, res) => {
+  if (req.session.logged){
+    res.render('messages/public.ejs', {
+      currentUser: req.session.currentuser
+    })
+  } else {
+    res.render(req.session.logged);
+  }
+})
+
 // Get private messages
 router.get('/:id', (req, res) => {
   if (req.session.currentuser._id == req.params.id) {
