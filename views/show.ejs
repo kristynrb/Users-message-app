@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>Welcome, <%= currentUser.username %></h1>
+    <%= currentUser._id %>
 
     <a href="#">Make a private message to yourself</a>
     <br>
@@ -13,7 +14,7 @@
     <br>
     <a href="#">See Public Messages</a>
     <br>
-    <a href="#">See Private messages</a>
+    <a href="/users/<%= currentUser._id %>">See Private messages</a>
     <br>
     <a href="/sessions/logout">Logout</a>
 

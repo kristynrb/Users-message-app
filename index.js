@@ -34,20 +34,36 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
-// ------------ for testing only - START--------------------
+// landing once logged in
 app.get('/show', (req, res) => {
-  res.render('show.ejs')
+  if (req.session.logged) {
+    res.render('show.ejs', {
+      currentUser: req.session.currentuser
+    })
+  } else {
+    res.redirect('/');
+  }
 });
 
+// private messages
 app.get('/private-messages', (req, res) => {
-  res.render('messages/private.ejs')
+  if (req.session.logged) {
+    res.render('messages/private.ejs', {
+      currentUser: req.session.currentuser
+    })
+  } else {
+    res.redirect('/');
+  }
 });
 
+// public messages
 app.get('/public-messages', (req, res) => {
-  res.render('messages/public.ejs')
+  if (req.session.logged) {
+    res.render('messages/public.ejs', {
+      currentUser: req.session.currentuser
+    })
+  }
 });
-
-// ------------ for testing only - END --------------------
 
 // welcome page - for those logged in
 app.get('/welcome', (req, res) => {
@@ -57,7 +73,7 @@ app.get('/welcome', (req, res) => {
     });
   } else {
     res.redirect('/')
-  }
+  };
 });
 
 //DATABASE & SERVER

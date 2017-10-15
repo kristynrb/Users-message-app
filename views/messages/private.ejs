@@ -5,7 +5,10 @@
     <title>Omni Labs Interview - Private Messages</title>
   </head>
   <body>
-    <h1>Private Messages</h1>
+    <h1><%= currentUser.username %>'s Private Messages</h1>
+    Current user id: <%= currentUser._id %>
+    Req params id: <%= requestedID %>
+
     <!-- Message that there are "no private messages" if there are none. -->
     <p>All private messages will be seen here</p>
   </body>
