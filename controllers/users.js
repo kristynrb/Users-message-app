@@ -9,7 +9,10 @@ router.get('/new', function(req, res){
 
 router.post('/', function(req, res){
     User.create(req.body, function(err, createdUser){
-        res.redirect('/welcome');
+        User.findOne({ username: req.body.username }, (err, foundUser) => {
+                req.session.currentuser = foundUser;
+                res.redirect('/welcome');
+        });        
     });
 });
 

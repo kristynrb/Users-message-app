@@ -52,9 +52,11 @@ app.get('/public-messages', (req, res) => {
 // welcome page - for those logged in
 app.get('/welcome', (req, res) => {
   if (req.session.logged) {
-    res.render('welcome.ejs');
+    res.render('show.ejs', {
+      currentUser: req.session.currentuser
+    });
   } else {
-    res.redirect('/sessions/login')
+    res.redirect('/')
   }
 });
 

@@ -5,7 +5,7 @@
     <title>Omni Labs Interview - Welcome</title>
   </head>
   <body>
-    <h1>Welcome, NAME</h1>
+    <h1>Welcome, <%= currentUser.username %></h1>
 
     <a href="#">Make a private message to yourself</a>
     <br>
@@ -16,5 +16,10 @@
     <a href=#>See Private messages</a>
     <br>
     <a href="#">Logout</a>
+    <li>
+    <form action="/sessions?_method=DELETE" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</li>
   </body>
 </html>
