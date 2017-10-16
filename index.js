@@ -48,26 +48,6 @@ app.get('/show', (req, res) => {
   }
 });
 
-// private messages
-app.get('/private-messages', (req, res) => {
-  if (req.session.logged) {
-    res.render('messages/private.ejs', {
-      currentUser: req.session.currentuser
-    })
-  } else {
-    res.redirect('/');
-  }
-});
-
-// public messages
-app.get('/public-messages', (req, res) => {
-  if (req.session.logged) {
-    res.render('messages/public.ejs', {
-      currentUser: req.session.currentuser
-    })
-  }
-});
-
 // welcome page - for those logged in
 app.get('/welcome', (req, res) => {
   if (req.session.logged) {

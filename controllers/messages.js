@@ -37,4 +37,19 @@ router.post('/', (req, res) => {
   })
 });
 
+// USER'S PRIVATE MESSAGES
+router.get('/:id', (req, res) => {
+  if (req.session.currentuser._id == req.params.id) {
+    Message.find({author_id: req.params.id, status: "private"}, (err, userPrivateMessages) => {
+        res.render('messages/private.ejs', {
+          messages: userPrivateMessages,
+          currentUser: req.session.currentuser,
+          requestedID: req.params.id
+        });
+    })
+  } else {
+      res.redirect('/');
+  }
+});
+
 module.exports = router;

@@ -3,6 +3,28 @@ const express = require('express'),
       bcrypt = require('bcrypt'),
       User = require('../models/users.js');
 
+// RENDER NEW USER PAGE
+router.get('/register', (req, res) => {
+    res.render('users/new.ejs');
+});
+
+// REGISTER A NEW USER
+router.post('/', (req, res) => {
+  // hash the password
+  const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+  //The new user
+  const newUser = {};
+  newUser.username = req.body.username;
+  newUser.password = hashedPassword;
+
+  User.create(newUser, (err, createdUser) => {
+        req.session.currentuser = createdUser;
+        req.session.logged = true;
+        res.redirect('/welcome');
+    });
+});
+
 //LOGIN
 router.get('/new', function(req, res){
     res.render('sessions/new.ejs');
@@ -35,8 +57,6 @@ router.get('/logout', function(req, res){
         res.redirect('/');
       }
   });
-    // req.session.logged = false;
-    // res.redirect('/');
 });
 
 module.exports = router;
