@@ -15,3 +15,5 @@ module.exports = {
     defaultFromAddress: 'First Last <test@example.com>'
   }
 };
+
+// Started referencing this tutorial for password reset via email http://www.scotchmedia.com/tutorials/express/authentication/3/02
