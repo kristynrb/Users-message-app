@@ -9,7 +9,7 @@ router.get('/register', (req, res) => {
 });
 
 // REGISTER A NEW USER
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
   // hash the password
   const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
@@ -26,15 +26,17 @@ router.post('/', (req, res) => {
 });
 
 //LOGIN
-router.get('/new', function(req, res){
+router.get('/new', (req, res) => {
     res.render('sessions/new.ejs');
 });
 
-//CREATE A NEW SESSION
-router.post('/', function(req, res){
+//SIGN IN - CREATE A NEW SESSION
+router.post('/', (req, res) => {
+  console.log(req.body);
     User.findOne({ username: req.body.username }, (err, foundUser) => {
+      console.log("foundUser:", foundUser);
       if(foundUser){
-        if(bcrypt.compareSync(req.body.password, foundUser.password)){
+        if(bcrypt.compare(req.body.password, foundUser.password)){
             req.session.currentuser = foundUser;
             req.session.logged = true;
             res.redirect('/welcome');
@@ -46,6 +48,38 @@ router.post('/', function(req, res){
         }
     });
 });
+
+//GET PASSWORD RESET PAGE
+router.get('/password-reset', (req, res) => {
+  console.log(req.session);
+  console.log("..............", req.session.currentuser.username);
+    res.render('users/reset.ejs', {
+      currentUserName: req.session.currentuser.username
+    });
+});
+
+// RESET PASSWORD
+router.post ('/password-reset', function(req, res){
+
+  let foundUser = User.findOne({username: req.body.username});
+  const newPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+    if(foundUser){
+      User.updateOne(
+        {username: req.body.username},
+        {$set:
+          {password : newPassword}
+        },(err, updatedDoc) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.redirect('/welcome');
+        }
+      })
+    } else {
+      res.redirect('/');
+    }
+})
 
 // LOGOUT OF SESSION
 router.get('/logout', function(req, res){
