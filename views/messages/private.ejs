@@ -6,7 +6,8 @@
 </head>
 <body>
   <h1><%= currentUser.username %>'s Private Message Page</h1>
-
+  <a href="/sessions/logout">Logout</a>
+    <hr>
   <h2>Write a private message</h2>
   <form action="/messages" method="POST">
     <input type="text" name="message" placeholder="message"/>

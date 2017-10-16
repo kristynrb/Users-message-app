@@ -7,7 +7,8 @@
   <body>
     <h1>Public Messages</h1>
     <h2>Welcome, <%= currentUser.username %>! Check out all of the messages.</h2>
-
+    <a href="/sessions/logout">Logout</a>
+      <hr>
     <h2>Write a public message</h2>
     <form action="/messages" method="POST">
       <input type="text" name="message" placeholder="message"/>
