@@ -24,11 +24,16 @@ router.get('/', (req, res) => {
       })*/
 
 router.post('/', (req, res) => {
-  Message.create([req.body], (err, createdMessage) => {
-    console.log(err)
-    res.send(createdMessage)
-    // res.redirect('/users/"<%= currentUser._id %>');
-  });
+  User.findById(req.body.author_id, (err, foundUser) => {
+    Message.create(req.body, (err, createdMessage) => {
+      foundUser.messages.push(createdMessage);
+      foundUser.save((err, data) => {
+        console.log(err)
+        res.redirect('/messages')
+      });
+        // res.redirect('/users/"<%= currentUser._id %>');
+    });
+  })
 });
 
 module.exports = router;
