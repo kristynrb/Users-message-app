@@ -11,7 +11,7 @@
     <hr>
   <h2>Write a private message</h2>
   <form action="/messages" method="POST">
-    <input type="text" name="message" placeholder="message"/>
+    <input type="text" class="u-full-width" name="message" placeholder="message"/>
     <input type="hidden" name="author_id" value="<%= currentUser._id %>">
     <input type="hidden" name="status" value="private">
     <br>
@@ -22,12 +22,14 @@
 
   <h2>Private Messages:</h2>
   <!-- Message that there are "no private messages" if there are none. -->
-  <ul>
+  <table class="u-full-width">
+    <tbody>
     <% for(let i = 0; i < messages.length; i++){ %>
-      <li>
-        <%=messages[i].message%>
-      </li>
+      <tr>
+        <td><%=messages[i].message%></td>
+      </tr>
       <% } %>
-    </ul>
+    </tbody>
+  </table>
   </body>
   </html>
