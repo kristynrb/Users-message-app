@@ -24,9 +24,6 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // CONTROLLERS
-// const usersController = require('./controllers/users.js');
-// app.use('/users', usersController);
-
 const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController);
 
