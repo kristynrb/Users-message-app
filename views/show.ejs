@@ -5,15 +5,11 @@
     <title>Omni Labs Interview - Welcome</title>
   </head>
   <body>
-    <h1>Welcome, <%= currentUser.username %></h1>
+    <h1>Welcome, <%= currentUser.username %>!</h1>
 
-    <a href="#">Make a private message to yourself</a>
+    <a href="/messages">See & Write Public Messages</a>
     <br>
-    <a href="#">Leave a public message</a>
-    <br>
-    <a href="/messages">See Public Messages</a>
-    <br>
-    <a href="/users/<%= currentUser._id %>">See Private messages</a>
+    <a href="/users/<%= currentUser._id %>">See & Write Private Messages</a>
     <br>
     <a href="/sessions/logout">Logout</a>
 

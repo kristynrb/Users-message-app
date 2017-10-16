@@ -8,8 +8,13 @@ router.get('/', (req, res) => {
   console.log("req.session.logged: ", req.session.logged);
   console.log("req.session: ", req.session)
   if (req.session.logged){
-    Message.find({status: "public"}, (err, allMessages) => {
-      res.send(allMessages);
+    Message.find({status: "public"}, (err, allPublicMessages) => {
+      // res.send(allMessages);
+      res.render('messages/public.ejs', {
+        messages: allPublicMessages,
+        currentUser: req.session.currentuser,
+        requestedID: req.params.id
+      });
     })
   } else {
     res.redirect('/');
