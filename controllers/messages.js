@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 
 // MAKE A MESSAGE
 router.post('/', (req, res) => {
+  console.log(req.body);
   User.findById(req.body.author_id, (err, foundUser) => {
     console.log("req.body.author_id: ", req.body.author_id);
     console.log("founduser: ", foundUser);
