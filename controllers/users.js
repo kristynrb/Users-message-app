@@ -1,5 +1,6 @@
 const express = require('express'),
       router = express.Router(),
+      bcrypt = require('bcrypt'),
       User = require('../models/users.js');
 
 // registration page
@@ -9,7 +10,15 @@ router.get('/new', (req, res) => {
 
 // create a new user
 router.post('/', (req, res) => {
-    User.create(req.body, (err, createdUser) => {
+  // hash the password
+  const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+  //The new user
+  const newUser = {};
+  newUser.username = req.body.username;
+  newUser.password = hashedPassword;
+
+  User.create(newUser, (err, createdUser) => {
         req.session.currentuser = createdUser;
         req.session.logged = true;
         res.redirect('/welcome');

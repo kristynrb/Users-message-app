@@ -1,5 +1,6 @@
 const express = require('express'),
       router = express.Router(),
+      bcrypt = require('bcrypt'),
       User = require('../models/users.js');
 
 //LOGIN
@@ -9,16 +10,17 @@ router.get('/new', function(req, res){
 
 //CREATE A NEW SESSION
 router.post('/', function(req, res){
-  console.log(req.body);
     User.findOne({ username: req.body.username }, (err, foundUser) => {
-      console.log(foundUser);
-      console.log(err);
-        if(req.body.password == foundUser.password){
+      if(foundUser){
+        if(bcrypt.compareSync(req.body.password, foundUser.password)){
             req.session.currentuser = foundUser;
             req.session.logged = true;
             res.redirect('/welcome');
+          } else {
+            res.send('password is incorrect');
+          }
         } else {
-            res.send('wrong password');
+          res.send('username is incorrect');
         }
     });
 });
