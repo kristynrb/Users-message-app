@@ -3,12 +3,12 @@ const express = require('express'),
       bcrypt = require('bcrypt'),
       User = require('../models/users.js');
 
-// registration page
+// RENDER NEW USER PAGE
 router.get('/new', (req, res) => {
     res.render('users/new.ejs');
 });
 
-// create a new user
+// REGISTER A NEW USER
 router.post('/', (req, res) => {
   // hash the password
   const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -25,29 +25,18 @@ router.post('/', (req, res) => {
     });
 });
 
-// destory session
-router.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-	    if(err){
-	      console.log(err);
-	    } else {
-	      res.redirect('/');
-	    }
-  });
-});
-
-// Get private messages
+// USER'S PRIVATE MESSAGES
 router.get('/:id', (req, res) => {
   if (req.session.currentuser._id == req.params.id) {
-    User.findById(req.params.id, (err, foundUser) => {
-      res.render('messages/private.ejs', {
-        user: foundUser,
-        currentUser: req.session.currentuser,
-        requestedID: req.params.id
-      });
+    Message.find({author_id: req.params.id, status: "private"}, (err, userPrivateMessages) => {
+        res.render('messages/private.ejs', {
+          messages: userPrivateMessages,
+          currentUser: req.session.currentuser,
+          requestedID: req.params.id
+        });
     })
   } else {
-    res.redirect('/');
+      res.redirect('/');
   }
 });
 

@@ -27,8 +27,16 @@ router.post('/', function(req, res){
 
 // LOGOUT OF SESSION
 router.get('/logout', function(req, res){
-    req.session.logged = false;
-    res.redirect('/');
+
+  req.session.destroy((err) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.redirect('/');
+      }
+  });
+    // req.session.logged = false;
+    // res.redirect('/');
 });
 
 module.exports = router;

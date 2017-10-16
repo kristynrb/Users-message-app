@@ -3,35 +3,30 @@ const express = require('express'),
       User = require('../models/users.js'),
       Message = require('../models/messages.js');
 
+// GET PUBLIC MESSAGES
 router.get('/', (req, res) => {
-  Message.find({}, (err, allMessages) => {
-    res.send(allMessages);
-  })
+  console.log("req.session.logged: ", req.session.logged);
+  console.log("req.session: ", req.session)
+  if (req.session.logged){
+    Message.find({status: "public"}, (err, allMessages) => {
+      res.send(allMessages);
+    })
+  } else {
+    res.redirect('/');
+  }
 });
 
-      // Get public messages
-      /*router.get('/', (req, res) => {
-        if (req.session.logged){
-          Messages.find({status: "public"}, (err, allMessages) => {
-            res.render('messages/public.ejs', {
-              messages: allMessages,
-              currentUser: req.session.currentuser
-            })
-          })
-        } else {
-          res.send(req.session.logged);
-        }
-      })*/
-
+// MAKE A MESSAGE
 router.post('/', (req, res) => {
   User.findById(req.body.author_id, (err, foundUser) => {
+    console.log("req.body.author_id: ", req.body.author_id);
+    console.log("founduser: ", foundUser);
     Message.create(req.body, (err, createdMessage) => {
       foundUser.messages.push(createdMessage);
       foundUser.save((err, data) => {
         console.log(err)
-        res.redirect('/messages')
+        res.redirect('/welcome')
       });
-        // res.redirect('/users/"<%= currentUser._id %>');
     });
   })
 });
