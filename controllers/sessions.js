@@ -11,6 +11,8 @@ router.get('/register', (req, res) => {
 // REGISTER A NEW USER
 router.post('/register', (req, res) => {
   // hash the password
+  console.log("hitting the post route for sessions/register");
+  console.log(req.body);
   const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
   //The new user
