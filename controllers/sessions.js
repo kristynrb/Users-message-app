@@ -17,6 +17,7 @@ router.post('/register', (req, res) => {
   const newUser = {};
   newUser.username = req.body.username;
   newUser.password = hashedPassword;
+  newUser.organization = req.body.organization;
 
   User.create(newUser, (err, createdUser) => {
         req.session.currentuser = createdUser;
