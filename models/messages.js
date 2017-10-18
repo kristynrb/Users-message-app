@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const messageSchema = mongoose.Schema ({
     message: {type: String, required: true},
     status: { type: String, required: true },
-    author_id: {type: String: required: true},
+    author_id: {type: String, required: true},
     organization: {type: String}
   });
 
