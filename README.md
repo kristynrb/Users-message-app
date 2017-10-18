@@ -21,9 +21,9 @@ x Add a dropdown for them to choose and org at sign up that assigns them to a ne
 
 x Add a field on the message model for an org.
 
-When making public messages, assign the org to the message.
+x When making public messages, assign the org to the message.
 
-When doing public messages, only query for the public messages with the org name associated.
+x When doing public messages, only query for the public messages with the org name associated.
 
 --------------------------
 
